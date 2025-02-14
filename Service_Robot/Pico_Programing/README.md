@@ -1,4 +1,4 @@
-# Pico Temaplte
+# Pico Temp.
 
 Here is a template for with the PICO W. without a testing network.
 
