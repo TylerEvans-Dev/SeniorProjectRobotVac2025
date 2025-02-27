@@ -6,12 +6,18 @@
 
 const char hello[13] = "hello world ";
 const char name[4] = "robo";
+const int HIGH =1;
+const int LOW =0;
 
 
 void task(void){
     int i =0;
+    gpio_init(21);
+    gpio_set_dir(21, GPIO_OUT);
+    gpio_put(21, 1);
+
+
     while(1){
-        i += 1;
         cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 1);
         sleep_ms(100);
         cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 0);
@@ -20,18 +26,8 @@ void task(void){
     }
 }
 
-void pwm(void){
-    //inits the gpio for use
-    gpio_init(1);
-    gpio_init(2);
-    gpio_init(3);
-    //sets the three them
-    gpio_set_function(1, GPIO_FUNC_PWM);
-    gpio_set_function(2, GPIO_FUNC_PWM);
-    gpio_set_function(3, GPIO_FUNC_PWM);
 
 
-}
 
 int main(){
     //this inits the stdio
@@ -40,7 +36,6 @@ int main(){
     //do not worry about printf as the function will still work
     cyw43_arch_init();
 
-    int i =0;
 
     task();
 
