@@ -6,6 +6,8 @@
 
 const char hello[13] = "hello world ";
 const char name[4] = "robo";
+const int LOW = 0;
+const int HIGH = 1;
 
 const int dir1 = 20;
 const int dir2 = 18;
@@ -50,14 +52,33 @@ void motorMov1(){
 
 
     gpio_put(dir1, 1);
+    gpio_put(dir2, 0);
+
+    for(int j =0; j< 400;j++){
+        gpio_put(step1, 1);
+        gpio_put(step2, 1);
+        sleep_ms(2);
+        gpio_put(step1, 0);
+        gpio_put(step2, 0);
+        sleep_ms(2);
+        //blink_loop();
+    }
+
+}
+void motorMovback(){
+
+
+    gpio_put(dir1, 0);
     gpio_put(dir2, 1);
 
     for(int j =0; j< 400;j++){
         gpio_put(step1, 1);
-        sleep_us(700);
+        gpio_put(step2, 1);
+        sleep_ms(2);
         gpio_put(step1, 0);
-        sleep_us(700);
-        blink_loop();
+        gpio_put(step2, 0);
+        sleep_ms(2);
+        //blink_loop();
     }
 
 }
@@ -82,13 +103,20 @@ int main(){
     gpio_init(step1);
     gpio_init(dir2);
     gpio_init(step2);
+    gpio_set_dir(dir1, GPIO_OUT);
+    gpio_set_dir(dir2, GPIO_OUT);
+    gpio_set_dir(step1, GPIO_OUT);
+    gpio_set_dir(step2, GPIO_OUT);
+
 
     int i =0;
 
     //task();
     while(1){
         motorMov1();
-        sleep_ms(100);
+        blink_loop();
+        motorMovback();
+        //sleep_ms(100);
         //motorMov2();
         //sleep_ms(1000);
     }
