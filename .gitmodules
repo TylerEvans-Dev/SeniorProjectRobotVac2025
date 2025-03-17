@@ -4,3 +4,6 @@
 [submodule "Service_Robot/Pico_Programing/lib/FreeRTOS-Kernel"]
 	path = Service_Robot/Pico_Programing/lib/FreeRTOS-Kernel
 	url = https://github.com/FreeRTOS/FreeRTOS-Kernel.git
+[submodule "Service_Robot/Pico_Programing/lib/paho.mqtt.embedded-c"]
+	path = Service_Robot/Pico_Programing/lib/paho.mqtt.embedded-c
+	url = https://github.com/eclipse/paho.mqtt.embedded-c.git

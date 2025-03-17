@@ -14,6 +14,11 @@ const int dir2 = 18;
 const int step1 = 21;
 const int step2 = 19;
 
+const int dc1 = 1;
+const int dc2 = 2;
+const int dc3 = 3;
+const int dc4 = 4;
+
 
 
 void task(void){
@@ -93,6 +98,64 @@ void motorMov2(){
     }
 }
 
+void initDCM(){
+    //this is for the gpio of the L298
+    gpio_init(dc1);
+    gpio_init(dc2);
+    gpio_init(dc3);
+    gpio_init(dc4);
+    gpio_set_dir(dc1, GPIO_OUT);
+    gpio_set_dir(dc2, GPIO_OUT);
+    gpio_set_dir(dc3, GPIO_OUT);
+    gpio_set_dir(dc4, GPIO_OUT);
+}
+
+void DC_forward_12(){
+    //
+    gpio_put(dc1, HIGH);
+    gpio_put(dc2, LOW);
+    //gpio_put(dc3, HIGH);
+    //gpio_put(dc4, LOW);
+}
+void DC_backward_12(){
+    gpio_put(dc1, LOW);
+    gpio_put(dc2, HIGH);
+    //gpio_put(dc3, LOW);
+    //gpio_put(dc4, HIGH);
+}
+
+void DC_forward_34(){
+    gpio_put(dc3, HIGH);
+    gpio_put(dc4, LOW);
+}
+
+void DC_backward_34(){
+    gpio_put(dc3, LOW);
+    gpio_put(dc4, HIGH);
+}
+
+void READ12(){
+
+}
+
+void READ34(){
+
+}
+
+void DO_YA_THING(){
+    sleep_ms(5000);
+    printf("going forward\n");
+    //DC_forward_12();
+    DC_forward_34();
+    sleep_ms(1000);
+    printf("going backwords\n");
+    //DC_backward_12();
+    DC_backward_34();
+    sleep_ms(1000);
+    printf("completed motion\n");
+
+}
+
 int main(){
     //this inits the stdio
     stdio_init_all();
@@ -107,18 +170,20 @@ int main(){
     gpio_set_dir(dir2, GPIO_OUT);
     gpio_set_dir(step1, GPIO_OUT);
     gpio_set_dir(step2, GPIO_OUT);
-
+    //this inits the dc motor.
+    initDCM();
 
     int i =0;
 
     //task();
     while(1){
-        motorMov1();
-        blink_loop();
-        motorMovback();
+        //motorMov1();
+        //blink_loop();
+        //motorMovback();
         //sleep_ms(100);
         //motorMov2();
         //sleep_ms(1000);
+        DO_YA_THING();
     }
     //task();
 
