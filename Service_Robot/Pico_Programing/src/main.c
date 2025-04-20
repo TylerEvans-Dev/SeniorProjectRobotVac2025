@@ -14,14 +14,15 @@ void task(void){
     int i =0;
     gpio_init(21);
     gpio_set_dir(21, GPIO_OUT);
-    gpio_put(21, 1);
 
 
     while(1){
         cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 1);
-        sleep_ms(100);
+        gpio_put(21, HIGH);
+        sleep_ms(1000);
         cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 0);
-        sleep_ms(100);
+        gpio_put(21, LOW);
+        sleep_ms(1000);
 
     }
 }
